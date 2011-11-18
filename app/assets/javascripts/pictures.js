@@ -60,14 +60,6 @@ $(function() {
     );
   });
 
-  // copy
-  $("#pictures img").click(function() {
-    var image = new Image();
-    image.src = $(this).attr("src");
-    ctx.clearRect(0, 0, canvas.width(), canvas.height());
-    ctx.drawImage(image, 0, 0);
-  });
-
   function draw(e) {
     if (!drawFlag) return;
     var x = e.clientX;
@@ -97,6 +89,14 @@ $(function() {
           if(parseInt(ids[i]) > 0){
             pictures.append("<img src=\"/images/" + ids[i] + ".png\" class=\"thumbnail\" />")
           }
+        });
+
+        // copy
+        $("#pictures img").click(function() {
+          var image = new Image();
+          image.src = $(this).attr("src");
+          ctx.clearRect(0, 0, canvas.width(), canvas.height());
+          ctx.drawImage(image, 0, 0);
         });
       }
     )
