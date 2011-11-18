@@ -33,18 +33,22 @@ $(function() {
     drawFlag = false;
   });
 
+  // select color
   $("#colorPalet div").click(function() {
     penColor = colorList[this.id];
   });
 
+  // select pen width
   $("#pen-width-slider").change(function() {
     brushSize = $(this).val();
   });
 
+  // clear
   $("#clear-button").click(function() {
     ctx.clearRect(0, 0, canvas.width(), canvas.height());
   });
 
+  // save
   $("#save-button").click(function() {
     var url = canvas[0].toDataURL();
     $.post(
@@ -56,6 +60,13 @@ $(function() {
     );
   });
 
+  // copy
+  $("#pictures img").click(function() {
+    var image = new Image();
+    image.src = $(this).attr("src");
+    ctx.clearRect(0, 0, canvas.width(), canvas.height());
+    ctx.drawImage(image, 0, 0);
+  });
 
   function draw(e) {
     if (!drawFlag) return;
