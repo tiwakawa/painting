@@ -16,9 +16,6 @@ $(function() {
     "white"  : "rgba(255, 255, 255, 1)"
   }
 
-  $("#colorPalet div").click(function() {
-    penColor = colorList[this.id];
-  });
 
   canvas.mousemove(function(e) {
     draw(e);
@@ -53,4 +50,13 @@ $(function() {
     oldX = x;
     oldY = y;
   }
+
+  $("#colorPalet div").click(function() {
+    penColor = colorList[this.id];
+  });
+
+  $("#pen-width-slider").change(function() {
+    brushSize = $(this).val();
+  });
+
 });
