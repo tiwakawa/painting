@@ -1,9 +1,5 @@
 
-#drawArea {
-  float: left;
-}
-
-#colorPalet {
+#drawArea, #colorPalet {
   float: left;
 }
 
@@ -14,13 +10,11 @@
   border: 1px solid #000;
 }
 
-
 #colorPalet div {
   width: 32px;
   height: 32px;
   border: 1px solid gray;
 }
-
 #black {
   background-color : #000000;
 }
@@ -46,3 +40,25 @@
   background-color : #ffffff;
 }
 
+#slider {
+  height: 50px;
+}
+
+#pictures {
+  margin-top: 20px;
+}
+
+.button {
+  margin-top: 100px;
+  padding: 10px;
+  border: 1px solid #333;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.thumbnail {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #000;
+  margin: 10px;
+}

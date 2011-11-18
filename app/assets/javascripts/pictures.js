@@ -1,5 +1,6 @@
 $(function() {
   var canvas = $("#myCanvas");
+  var ctx = canvas[0].getContext("2d");
   var drawFlag = false;
   var brushSize = 1;
   var penColor = "rgba(255, 0, 0, 1)";
@@ -15,6 +16,7 @@ $(function() {
     "yellow" : "rgba(255, 255, 0, 1)",
     "white"  : "rgba(255, 255, 255, 1)"
   }
+  reloadPictures();
 
 
   canvas.mousemove(function(e) {
@@ -31,12 +33,34 @@ $(function() {
     drawFlag = false;
   });
 
+  $("#colorPalet div").click(function() {
+    penColor = colorList[this.id];
+  });
+
+  $("#pen-width-slider").change(function() {
+    brushSize = $(this).val();
+  });
+
+  $("#clear-button").click(function() {
+    ctx.clearRect(0, 0, canvas.width(), canvas.height());
+  });
+
+  $("#save-button").click(function() {
+    var url = canvas[0].toDataURL();
+    $.post(
+      '/pictures',
+      {data: url},
+      function() {
+        reloadPictures();
+      }
+    );
+  });
+
+
   function draw(e) {
     if (!drawFlag) return;
     var x = e.clientX;
     var y = e.clientY;
-    var canvas = $("#myCanvas");
-    var ctx = canvas[0].getContext("2d");
 
     ctx.strokeStyle = penColor;
     ctx.lineWidth = brushSize;
@@ -51,12 +75,19 @@ $(function() {
     oldY = y;
   }
 
-  $("#colorPalet div").click(function() {
-    penColor = colorList[this.id];
-  });
-
-  $("#pen-width-slider").change(function() {
-    brushSize = $(this).val();
-  });
-
+  function reloadPictures() {
+    $.get(
+      '/pictures',
+      function(data, status, xhr) {
+        ids = data.split(',');
+        pictures = $("#pictures");
+        pictures.empty();
+        $.each(ids, function(i) {
+          if(parseInt(ids[i]) > 0){
+            pictures.append("<img src=\"/images/" + ids[i] + ".png\" class=\"thumbnail\" />")
+          }
+        });
+      }
+    )
+  }
 });
