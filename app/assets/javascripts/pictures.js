@@ -85,9 +85,9 @@ $(function() {
         ids = data.split(',');
         pictures = $("#pictures");
         pictures.empty();
-        $.each(ids, function(i) {
-          if(parseInt(ids[i]) > 0){
-            pictures.append("<img src=\"/images/" + ids[i] + ".png\" class=\"thumbnail\" />")
+        $.each(ids, function(i, val) {
+          if(parseInt(val) > 0){
+            pictures.append("<img src=\"/images/" + val + ".png\" class=\"thumbnail\" />")
           }
         });
 
