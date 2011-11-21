@@ -67,7 +67,7 @@ $(function() {
 
     ctx.strokeStyle = penColor;
     ctx.lineWidth = brushSize;
-    ctx.lienJoin = "round";
+    ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.beginPath();
     ctx.moveTo(oldX, oldY);
