@@ -12,6 +12,10 @@
     <div id="yellow"></div>
     <div id="white"></div>
   </div>
+  <div id="uploadArea">
+    <%= file_field_tag :image, :id => "uploadFile", :multiple => true %>
+    <div id="uploadPreview"></div>
+  </div>
 </div>
 <div id="slider">
   <%= range_field_tag "pen-width-slider", 1, :min => 1, :max => 20 %>

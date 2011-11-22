@@ -60,6 +60,22 @@ $(function() {
     );
   });
 
+  // upload preview
+  $("#uploadFile").change(function() {
+    var file = this.files[0];
+    var image = new Image();
+    var reader = new FileReader();
+
+    reader.onload = function(evt) {
+      image.src = evt.target.result;
+      $("#uploadPreview").empty().append(image);
+      ctx.clearRect(0, 0, canvas.width(), canvas.height());
+      ctx.drawImage(image, 0, 0);
+    }
+
+    reader.readAsDataURL(file);
+  });
+
   function draw(e) {
     if (!drawFlag) return;
     var x = e.clientX;
