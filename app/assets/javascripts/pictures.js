@@ -63,7 +63,7 @@ $(function() {
   // image preview
   $("#uploadFile").change(function() {
     var file = this.files[0];
-    if (!/^image\/(png|jpeg|gif)$/.test(file.type)) return;
+    if (!file.type.match(/^image\/(png|jpeg|gif)$/)) return;
 
     var image = new Image();
     var reader = new FileReader();
@@ -75,6 +75,30 @@ $(function() {
       image.src = evt.target.result;
     }
     reader.readAsDataURL(file);
+  });
+
+  // drag & drop
+  window.addEventListener("dragover", function(evt) {
+    evt.preventDefault();
+  }, false);
+
+  window.addEventListener("drop", function(evt) {
+    evt.preventDefault();
+    var file = evt.dataTransfer.files[0];
+
+    if (!file.type.match(/^image\/(png|jpeg|gif)$/)) return;
+
+    var image = new Image();
+    var reader = new FileReader();
+
+    reader.onload = function(evt) {
+      image.onload = function() {
+        ctx.drawImage(image, 0, 0);
+      }
+      image.src = evt.target.result;
+    }
+    reader.readAsDataURL(file);
+
   });
 
   function draw(e) {
