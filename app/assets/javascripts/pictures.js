@@ -60,19 +60,20 @@ $(function() {
     );
   });
 
-  // upload preview
+  // image preview
   $("#uploadFile").change(function() {
     var file = this.files[0];
+    if (!/^image\/(png|jpeg|gif)$/.test(file.type)) return;
+
     var image = new Image();
     var reader = new FileReader();
 
     reader.onload = function(evt) {
+      image.onload = function() {
+        ctx.drawImage(image, 0, 0);
+      }
       image.src = evt.target.result;
-      $("#uploadPreview").empty().append(image);
-      ctx.clearRect(0, 0, canvas.width(), canvas.height());
-      ctx.drawImage(image, 0, 0);
     }
-
     reader.readAsDataURL(file);
   });
 
